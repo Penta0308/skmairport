@@ -40,11 +40,11 @@
 			var apn = "<?php echo $_GET['a']; ?>";
 			var craftlist = new Array();
 			
-			function acsort(iarray) {
+			function acsort() {
 				var oarray = new Array();
 				var i = 0;
-				console.log("iarray length : "+iarray.length);
-				for( ; i<iarray.length ; i++)
+				console.log("craftlist length : "+craftlist.length);
+				for( ; i<craftlist.length ; i++)
 				{
 					var o = 0;
 					while(1){
@@ -54,17 +54,17 @@
 							for( ; c < oarray.length ; c++)
 								oarray[c+1] = oarray[c];
 							
-							oarray[o] = iarray[i];
+							oarray[o] = craftlist[i];
 							console.log("inserted at : "+o);
 							break;
 						}
-						if(iarray[i].time < oarray[o].time)
+						if(craftlist[i].time < oarray[o].time)
 						{
 							var c = o;
 							for( ; c < oarray.length ; c++)
 								oarray[c+1] = oarray[c];
 							
-							oarray[o] = iarray[i];
+							oarray[o] = craftlist[i];
 							console.log("inserted at : "+o);
 							break;
 						}
