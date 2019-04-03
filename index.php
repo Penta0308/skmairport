@@ -37,28 +37,6 @@
 	</head>
 	<body>
 		<script>
-			
-			!function() {
-    function _dynamicSort(property) {
-        var sortOrder = 1;
-				if(property[0] === "-") {
-					sortOrder = -1;
-					property = property.substr(1);
-				}
-				return function (a,b) {
-					var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-					return result * sortOrder;
-				}
-    }
-    Object.defineProperty(Array.prototype, "sortBy", {
-        enumerable: false,
-        writable: true,
-        value: function() {
-            return this.sort(_dynamicSortMultiple.apply(null, arguments));
-        }
-    });
-}();
-			
 			var apn = "<?php echo $_GET['a']; ?>";
 			var craftlist = [];
 			
@@ -67,10 +45,10 @@
 			}
 			
 			function compare(a, b) {
-				return a.time - b.time;
+				return a[time] - b[time];
 			}
 			
-			/*function dynamicSort(property) {
+			function dynamicSort(property) {
 				var sortOrder = 1;
 				if(property[0] === "-") {
 					sortOrder = -1;
@@ -80,7 +58,7 @@
 					var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
 					return result * sortOrder;
 				}
-			}*/
+			}
 			
 			$(function()
 			{
@@ -121,10 +99,13 @@
 												{
 													if(nowinfo[1].trim().substring(b, b+1).localeCompare("1")) continue;
 													var nowcraft = {};
-													nowcraft.time = parseInt(b) * 1440 + parseInt(nowinfo[2].trim().substring(0, 2)) * 60 + parseInt(nowinfo[2].trim().substring(3, 5));
-													nowcraft.name = String(str.split('.')[0]+trim(nowinfo[0]));
-													nowcraft.dest = String(nowinfo[3].trim());
+													nowcraft["time"] = parseInt(b) * 1440 + parseInt(nowinfo[2].trim().substring(0, 2)) * 60 + parseInt(nowinfo[2].trim().substring(3, 5));
+													nowcraft["name"] = String(str.split('.')[0]+trim(nowinfo[0]));
+													nowcraft["dest"] = String(nowinfo[3].trim());
 													craftlist.push(nowcraft);
+													var c = 0;
+													for( ; craftlist[c, "time"] < nowcraft["time"] ; c++ ) {}
+													craftlist.splice(c, 0, nowcraft);
 												}
 											}
 										},
