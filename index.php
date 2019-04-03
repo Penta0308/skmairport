@@ -37,6 +37,28 @@
 	</head>
 	<body>
 		<script>
+			
+			!function() {
+    function _dynamicSort(property) {
+        var sortOrder = 1;
+				if(property[0] === "-") {
+					sortOrder = -1;
+					property = property.substr(1);
+				}
+				return function (a,b) {
+					var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+					return result * sortOrder;
+				}
+    }
+    Object.defineProperty(Array.prototype, "sortBy", {
+        enumerable: false,
+        writable: true,
+        value: function() {
+            return this.sort(_dynamicSortMultiple.apply(null, arguments));
+        }
+    });
+}();
+			
 			var apn = "<?php echo $_GET['a']; ?>";
 			var craftlist = [];
 			
@@ -47,6 +69,18 @@
 			function compare(a, b) {
 				return a.time - b.time;
 			}
+			
+			/*function dynamicSort(property) {
+				var sortOrder = 1;
+				if(property[0] === "-") {
+					sortOrder = -1;
+					property = property.substr(1);
+				}
+				return function (a,b) {
+					var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+					return result * sortOrder;
+				}
+			}*/
 			
 			$(function()
 			{
@@ -86,11 +120,11 @@
 												for(var b=0 ; b < 7 ; b++)
 												{
 													if(nowinfo[1].trim().substring(b, b+1).localeCompare("1")) continue;
-													var nowpointer = craftlist.length;
-													craftlist[nowpointer] = new Object();
-													craftlist[nowpointer].time = parseInt(b) * 1440 + parseInt(nowinfo[2].trim().substring(0, 2)) * 60 + parseInt(nowinfo[2].trim().substring(3, 5));
-													craftlist[nowpointer].name = String(str.split('.')[0]+trim(nowinfo[0]));
-													craftlist[nowpointer].dest = String(nowinfo[3].trim());
+													var nowcraft = {};
+													nowcraft.time = parseInt(b) * 1440 + parseInt(nowinfo[2].trim().substring(0, 2)) * 60 + parseInt(nowinfo[2].trim().substring(3, 5));
+													nowcraft.name = String(str.split('.')[0]+trim(nowinfo[0]));
+													nowcraft.dest = String(nowinfo[3].trim());
+													craftlist.push(nowcraft);
 												}
 											}
 										},
@@ -101,8 +135,7 @@
 								});
 								console.log(craftlist);
 								
-								craftlist.sort(function(a, b) {
-									return a.time - b.time;
+								craftlist.sort(dynamicSort("name"));
 								
 								console.log(craftlist);
 								
