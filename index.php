@@ -38,47 +38,7 @@
 	<body>
 		<script>
 			var apn = "<?php echo $_GET['a']; ?>";
-			var craftlist = new Array();
-			
-			function acsort() {
-				var oarray = new Array();
-				var i = 0;
-				console.log("craftlist data : "+craftlist);
-				for( ; i<craftlist.length ; i++)
-				{
-					var o = 0;
-					while(1){
-						if(o == oarray.length)
-						{
-							var c = o;
-							for( ; c < oarray.length ; c++)
-								oarray[c+1] = oarray[c];
-							
-							oarray[o] = craftlist[i];
-							console.log("inserted at : "+o);
-							break;
-						}
-						if(craftlist[i].time < oarray[o].time)
-						{
-							var c = o;
-							for( ; c < oarray.length ; c++)
-								oarray[c+1] = oarray[c];
-							
-							oarray[o] = craftlist[i];
-							console.log("inserted at : "+o);
-							break;
-						}
-						o++;
-					};
-				}
-				return oarray;
-			}
-			
-			function aircraft() {
-				var name;
-				var Number;
-				var dest;
-			}
+			var craftlist = [];
 			
 			function trim(stringToTrim) {
 				return stringToTrim.replace(/^\s+|\s+$/g,"");
@@ -127,10 +87,10 @@
 												{
 													if(nowinfo[1].trim().substring(b, b+1).localeCompare("1")) continue;
 													var nowpointer = craftlist.length;
-													craftlist[nowpointer] = new aircraft();
-													craftlist[nowpointer].name = str.split('.')[0]+trim(nowinfo[0]);
+													craftlist[nowpointer] = new Object();
 													craftlist[nowpointer].time = parseInt(b) * 1440 + parseInt(nowinfo[2].trim().substring(0, 2)) * 60 + parseInt(nowinfo[2].trim().substring(3, 5));
-													craftlist[nowpointer].dest = nowinfo[3].trim();
+													craftlist[nowpointer].name = String(str.split('.')[0]+trim(nowinfo[0]));
+													craftlist[nowpointer].dest = String(nowinfo[3].trim());
 												}
 											}
 										},
@@ -139,6 +99,15 @@
 										}  
 									});
 								});
+								console.log(craftlist);
+								
+								craftlist.sort(function(a, b) {
+									return a.time - b.time;
+								
+								console.log(craftlist);
+								
+								
+								
 							},
 							error: function(xhr, status, error) {
 								console.log(error);
@@ -150,8 +119,6 @@
 						if(!error.localeCompare("Not Found")) alert("404 (Not Found)");
 					}
 				});
-				
-				console.log(acsort(craftlist));
 			});
 		</script>
 		<table class="wrapper">
