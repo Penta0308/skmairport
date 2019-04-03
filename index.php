@@ -43,7 +43,7 @@
 			function acsort() {
 				var oarray = new Array();
 				var i = 0;
-				console.log("craftlist length : "+craftlist.length);
+				console.log("craftlist data : "+craftlist);
 				for( ; i<craftlist.length ; i++)
 				{
 					var o = 0;
