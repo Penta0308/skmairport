@@ -142,7 +142,7 @@
 				
 				
 				console.log(
-					craftlist.sort(acsort)
+					acsort(craftlist)
 				);
 				console.log(craftlist);
 			});
