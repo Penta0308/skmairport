@@ -128,13 +128,13 @@
 		</script>
 		<table class="wrapper">
 		<tr class="deptitlebar dep depinv">
-		<td colspan="4">
+		<td class="deptitlebar" colspan="4">
 			<img src="/departures.svg" class="dep depinv center"></img>
 		</td>
-		<td colspan="6">
+		<td class="deptitlebar" colspan="6">
 			<a class="dep depinv center">DEPARTURES</a>
 		</td>
-		<td>
+		<td class="deptitlebar">
 			<a id="airporttitle"></a>
 		</td>
 		</tr>
