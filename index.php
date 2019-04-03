@@ -49,11 +49,19 @@
 					while(1){
 						if(o == oarray.length)
 						{
+							var c = o;
+							for( ; c < oarray.length ; c++)
+								oarray[c+1] = oarray[c];
+							
 							oarray[o] = iarray[i];
 							break;
 						}
 						if(iarray[i].time < oarray[o].time)
 						{
+							var c = o;
+							for( ; c < oarray.length ; c++)
+								oarray[c+1] = oarray[c];
+							
 							oarray[o] = iarray[i];
 							break;
 						}
@@ -144,7 +152,6 @@
 				console.log(
 					acsort(craftlist)
 				);
-				console.log(craftlist);
 			});
 		</script>
 		<table class="wrapper">
