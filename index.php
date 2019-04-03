@@ -52,7 +52,7 @@
 							oarray[o] = iarray[i];
 							break;
 						}
-						if(iarray[i] < oarray[o])
+						if(iarray[i].time < oarray[o].time)
 						{
 							oarray[o] = iarray[i];
 							break;
