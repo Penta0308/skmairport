@@ -40,6 +40,29 @@
 			var apn = "<?php echo $_GET['a']; ?>";
 			var craftlist = new Array();
 			
+			function acsort(iarray) {
+				var oarray = new Array();
+				var i = 0;
+				for( ; i<iarray.length ; i++)
+				{
+					var o = 0;
+					while(1){
+						if(o == oarray.length)
+						{
+							oarray[o] = iarray[i];
+							break;
+						}
+						if(iarray[i] < oarray[o])
+						{
+							oarray[o] = iarray[i];
+							break;
+						}
+						o++;
+					};
+				}
+				return oarray;
+			}
+			
 			function aircraft() {
 				var name;
 				var Number;
@@ -119,42 +142,44 @@
 				
 				
 				console.log(
-					craftlist.sort(function(a, b) {
-						console.log(a, b);
-						return a.time < b.time ? -1 : a.time > b.time ? 1 : 0;
-					})
+					craftlist.sort(acsort)
 				);
+				console.log(craftlist);
 			});
 		</script>
 		<table class="wrapper">
-		<tr class="deptitlebar dep depinv">
-		<td>
-		<table>
-		<tr>
-		<td class="deptitlebar" colspan="4">
-			<img src="/departures.svg" class="dep depinv center"></img>
-		</td>
-		<td class="deptitlebar" colspan="6">
-			<a class="dep depinv center">DEPARTURES</a>
-		</td>
-		<td class="deptitlebar">
-			<a id="airporttitle"></a>
-		</td>
-		</tr>
-		</table>
-		</td>
-		</tr>
+			<tr class="deptitlebar dep depinv">
+				<td>
+					<table>
+						<tr>
+							<td class="deptitlebar" colspan="4">
+								<img src="/departures.svg" class="dep depinv center"></img>
+							</td>
+							<td class="deptitlebar"></td>
+							<td class="deptitlebar" colspan="6">
+								<a class="dep depinv center">DEPARTURES</a>
+							</td>
+							<td class="deptitlebar"></td>
+							<td class="deptitlebar" colspan="12">
+								<a id="airporttitle">
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
 		
-		<tr>
-		<td id="infoarea">
+			<tr>
+				<td id="infoarea">
 	
-		</td>
-		<tr>
+				</td>
+			</tr>
 	
-		<tr>
-		<td colspan="20">
-			<img width="1200px" id="airportimage" src="#" class="airportlogo"></img>
-		</td>
-		</tr>
+			<tr>
+				<td colspan="20">
+					<img width="1200px" id="airportimage" src="#" class="airportlogo"></img>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>
