@@ -11,7 +11,7 @@
 			.deptitlebar {
 				background:#000;
 				color:#fff;
-				font-size:2em;
+				font-size:3.8vh;
 				border-left:hidden;
 				border-right:hidden;
 			}
