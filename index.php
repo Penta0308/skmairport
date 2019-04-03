@@ -43,6 +43,7 @@
 			function acsort(iarray) {
 				var oarray = new Array();
 				var i = 0;
+				console.log("iarray length : "+iarray.length);
 				for( ; i<iarray.length ; i++)
 				{
 					var o = 0;
@@ -54,6 +55,7 @@
 								oarray[c+1] = oarray[c];
 							
 							oarray[o] = iarray[i];
+							console.log("inserted at : "+o);
 							break;
 						}
 						if(iarray[i].time < oarray[o].time)
@@ -63,6 +65,7 @@
 								oarray[c+1] = oarray[c];
 							
 							oarray[o] = iarray[i];
+							console.log("inserted at : "+o);
 							break;
 						}
 						o++;
@@ -148,10 +151,7 @@
 					}
 				});
 				
-				
-				console.log(
-					acsort(craftlist)
-				);
+				console.log(acsort(craftlist));
 			});
 		</script>
 		<table class="wrapper">
