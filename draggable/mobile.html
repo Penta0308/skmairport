@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+<title>YGX Draggable site</title>
+<style>
+	img {
+	height:6vh;
+	}
+	#ygxbg {
+	height:80%;
+	}
+	#control {
+	padding:2vh 1.5vh 2vh 1.5vh;
+	background:gray;
+	border:0.2vh solid black;
+	width:20vh;
+	}
+</style>
+<script src="/jquery-3.3.1.min.js" ></script>
+<script src="/jquery.form.min.js" ></script>
+<script src="/jquery-ui.min.js" ></script>
+<script src="/jquery.ui.touch-punch.min.js" ></script>
+<script>
+function addplane(){
+	var pid = $('#planename').val();
+	console.log(pid);
+	if(!pid.localeCompare("")) return;
+	$('#control').before("<div id=\"" + pid + "\"><img src=\"airplane.png\" ></img><br /><a>\"" + pid + "\"</a></div>");
+	$('#' + pid).on("dblclick", '#' + pid, function(eobj){
+		console.log(eobj);
+	});
+	$('#' + pid).draggable({
+		cursor: "move",
+		stack: ".draggable",
+		opacity: 0.7
+	});
+}
+function removeplane(){
+	var pid = $('#planename').val();
+	console.log(pid);
+	if(!pid.localeCompare("")) return;
+	$('#' + pid).remove();
+}
+</script>
+</head><body>
+	<image id="ygxbg" src="ygxbg.png"></image id="ddzone">
+	<div id="control">
+		<button onclick="javascript:addplane()">Add Aircraft</button>
+		<button onclick="javascript:removeplane()">Remove Aircraft</button>
+		<input id="planename" type="text"></input>
+	</div>
+</body><html>
